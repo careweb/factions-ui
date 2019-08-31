@@ -17,6 +17,7 @@ import android.view.MenuItem;
 
 import com.futuristic.careweb.services.AuthService;
 import com.futuristic.careweb.session.Session;
+import com.futuristic.careweb.utilities.Utility;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,6 +25,7 @@ import java.util.Map;
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private Context context;
+    private Utility utility;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +33,7 @@ public class HomeActivity extends AppCompatActivity
         context = super.getApplicationContext();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        utility = Utility.getInstance(context);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,6 +93,7 @@ public class HomeActivity extends AppCompatActivity
 
         if (id == R.id.logout) {
             AuthService service = new AuthService();
+            utility.startProgress();
             /**
              * We need to maintain a session here
              * Either by a database or using cookies.
@@ -108,7 +111,7 @@ public class HomeActivity extends AppCompatActivity
                 Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
                 startActivity(intent);
             }
-
+            utility.closeProgress();
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {

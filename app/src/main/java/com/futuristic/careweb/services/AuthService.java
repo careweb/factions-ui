@@ -2,6 +2,7 @@ package com.futuristic.careweb.services;
 
 import com.futuristic.careweb.beans.AuthRequest;
 import com.futuristic.careweb.beans.AuthResponse;
+import com.futuristic.careweb.beans.User;
 import com.futuristic.careweb.clients.AuthClient;
 import com.google.gson.Gson;
 
@@ -35,6 +36,20 @@ public class AuthService {
             Gson gson = new Gson();
             String loginEndPoint = "auth/signout";
             BoundRequestBuilder authRequest = AuthClient.buildPostRequest(loginEndPoint, map, "logout", map.get("token"));
+            Response response = new AuthClient().executeRequest(authRequest);
+            resp = gson.fromJson(response.getResponseBody(), Boolean.class);
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
+        return resp;
+    }
+
+    public boolean signup(User user){
+        Boolean resp = null;
+        try {
+            Gson gson = new Gson();
+            String loginEndPoint = "auth/signup";
+            BoundRequestBuilder authRequest = AuthClient.buildPostRequest(loginEndPoint, user, "signup", "");
             Response response = new AuthClient().executeRequest(authRequest);
             resp = gson.fromJson(response.getResponseBody(), Boolean.class);
         }catch(Exception ex){
