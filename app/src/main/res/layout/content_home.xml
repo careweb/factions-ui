@@ -8,4 +8,14 @@
     tools:context=".HomeActivity"
     tools:showIn="@layout/app_bar_home">
 
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="347dp"
+        android:layout_height="83dp"
+        android:text="Explore"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.513"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="345dp" />
 </android.support.constraint.ConstraintLayout>
